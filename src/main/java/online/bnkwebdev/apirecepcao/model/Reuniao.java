@@ -1,6 +1,7 @@
 package online.bnkwebdev.apirecepcao.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -24,6 +25,7 @@ public class Reuniao {
     private Long id;
 
     @NotNull(message = "A data da reunião é obrigatória.")
+    @FutureOrPresent( message = "A data da reunião não pode esta no passado.")
     private LocalDate dataReuniao;
 
     @NotNull(message = "O horário da reunião é obrigatória.")
