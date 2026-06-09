@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/reunioes") // <-- Estratégia de Versionamento de API aplicada aqui!
+@CrossOrigin(origins = "*") //<-- Libera acesso para o navegador
 public class ReuniaoController {
 
     @Autowired
