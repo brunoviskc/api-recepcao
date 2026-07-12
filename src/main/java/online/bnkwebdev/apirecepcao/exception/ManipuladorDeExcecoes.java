@@ -62,4 +62,18 @@ public class ManipuladorDeExcecoes {
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(corpoDoErro);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Map<String, Object>> manipularRegraDeNegocio(IllegalArgumentException ex, HttpServletRequest request) {
+
+        Map<String, Object> corpoDoErro = new LinkedHashMap<>();
+        corpoDoErro.put("timestamp", LocalDateTime.now());
+        corpoDoErro.put("status", HttpStatus.BAD_REQUEST.value());
+        corpoDoErro.put("erro", "Conflito de Agendamento");
+        // Captura a mensagem "Horário indisponível..." que escrevemos no Service
+        corpoDoErro.put("mensagem", ex.getMessage());
+        corpoDoErro.put("caminho", request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(corpoDoErro);
+    }
 }
